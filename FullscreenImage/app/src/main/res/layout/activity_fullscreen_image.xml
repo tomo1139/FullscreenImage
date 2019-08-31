@@ -26,23 +26,30 @@
             android:visibility="gone" />
 
         <RelativeLayout
-            android:id="@+id/tool_bar"
+            android:id="@+id/tool_bar_container"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="@drawable/bg_top_to_bottom_transparent_gradation"
-            android:paddingLeft="4dp"
-            android:paddingRight="8dp">
+            android:layout_height="80dp"
+            android:background="@drawable/bg_top_to_bottom_transparent_gradation">
 
-            <ImageView
-                android:id="@+id/back_button"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:foreground="?attr/actionBarItemBackground"
-                android:padding="8dp"
-                android:src="@drawable/ic_close_black_24dp"
-                android:tint="#ffffff" />
+            <RelativeLayout
+                android:id="@+id/tool_bar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:paddingLeft="4dp"
+                android:paddingRight="8dp">
+
+                <ImageView
+                    android:id="@+id/back_button"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:foreground="?attr/actionBarItemBackground"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_close_black_24dp"
+                    android:tint="#ffffff" />
+
+            </RelativeLayout>
 
         </RelativeLayout>
 
