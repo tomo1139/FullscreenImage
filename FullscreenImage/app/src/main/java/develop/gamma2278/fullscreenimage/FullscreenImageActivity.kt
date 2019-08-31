@@ -2,7 +2,6 @@ package develop.gamma2278.fullscreenimage
 
 import android.content.Context
 import android.graphics.Color
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,7 +12,6 @@ import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import develop.gamma2278.fullscreenimage.databinding.ActivityFullscreenImageBinding
 import okhttp3.OkHttpClient
-import java.lang.Exception
 
 class FullscreenImageActivity : AppCompatActivity() {
     private val binding by lazy { DataBindingUtil.setContentView<ActivityFullscreenImageBinding>(this, R.layout.activity_fullscreen_image) }
@@ -24,7 +22,7 @@ class FullscreenImageActivity : AppCompatActivity() {
         setupPicasso()
         this.setupStatusBar(true, Color.TRANSPARENT, false)
         binding.toolBar.translationY = getStatusBarHeight(this).toFloat()
-        FullScreenService.showNavigatoinBar(window)
+        FullscreenService.hideNavigationBar(window)
         val builder = Picasso.Builder(this)
         builder.listener { picasso, uri, exception ->
             Log.e("dbg", "uri: " + uri + ", exception: " + exception.message)
@@ -42,19 +40,14 @@ class FullscreenImageActivity : AppCompatActivity() {
         binding.backButton.setOnClickListener { finish() }
         binding.photoView.setOnClickListener {
             if (binding.toolBarContainer.alpha == 1f) {
-                FullScreenService.hideNavigationBar(window)
+                FullscreenService.hideStatusBar(window)
                 binding.toolBarContainer.animate().alphaBy(1f).alpha(0f).setDuration(400).withEndAction { binding.toolBarContainer.visibility = View.INVISIBLE }.start()
             } else if (binding.toolBarContainer.alpha == 0f) {
-                FullScreenService.showNavigatoinBar(window)
+                FullscreenService.showStatusBar(window)
                 binding.toolBarContainer.visibility = View.VISIBLE
                 binding.toolBarContainer.animate().alphaBy(0f).alpha(1f).setDuration(400).start()
             }
         }
-    }
-
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        //if (hasFocus) FullScreenService.hideNavigationBar(window)
     }
 
     private fun setupPicasso() {
